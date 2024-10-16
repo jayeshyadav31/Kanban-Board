@@ -1,4 +1,4 @@
-import {useEffect, useState, useCallback} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import axios from 'axios';
 
 import './App.css';
@@ -8,12 +8,13 @@ import Navbar from './Components/Navbar/Navbar';
 
 function App() {
   const statusList = ['In progress', 'Backlog', 'Todo', 'Done', 'Cancelled']
+  const [userList,setUserList] = useState([])
   const priorityList = [{name:'No priority', priority: 0}, {name:'Low', priority: 1}, {name:'Medium', priority: 2}, {name:'High', priority: 3}, {name:'Urgent', priority: 4}]
 
   const [groupValue, setgroupValue] = useState(getStateFromLocalStorage() || 'status')
   const [orderValue, setorderValue] = useState('title')
   const [ticketDetails, setticketDetails] = useState([]);
-  const [users,setUser]=useState()
+
 
   const orderDataByValue = useCallback(async (cardsArry) => {
     if (orderValue === 'priority') {
@@ -52,8 +53,11 @@ function App() {
     async function fetchData() {
       const response = await axios.get('https://api.quicksell.co/v1/internal/frontend-assignment');
       await refactorData(response);
-      const data=await response.json()
-      setUser(data.users)
+      const usersArray=[]
+      response.data.users.forEach((user)=>{
+        usersArray.push(user.name)
+      })
+      setUserList(usersArray)
     }
     fetchData();
     async function refactorData(response){
@@ -68,7 +72,7 @@ function App() {
             }
           }
         }
-      setticketDetails(ticketArray)
+      await setticketDetails(ticketArray)
       orderDataByValue(ticketArray)
     }
     
@@ -113,14 +117,14 @@ function App() {
               </>,
               'user' : <>
               {
-                users.map((listItem ,index) => {
+                userList.map((listItem,index) => {
                   return(<List
                     key={index}
                     groupValue='user'
                     orderValue={orderValue}
-                    listTitle={listItem.name}
+                    listTitle={listItem}
                     listIcon=''
-                    // userList={userList}
+                    userList={userList}
                     ticketDetails={ticketDetails}
                   />)
                 })
@@ -130,7 +134,7 @@ function App() {
               {
                 priorityList.map((listItem,index) => {
                   return(<List
-                  key={index}
+                    key={index}
                     groupValue='priority'
                     orderValue={orderValue}
                     listTitle={listItem.priority}

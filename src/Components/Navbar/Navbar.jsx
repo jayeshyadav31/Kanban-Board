@@ -1,6 +1,4 @@
 import React, {useState} from 'react'
-import filterIcon from '../../Assets/Images/Tuning.svg'
-import downIcon from '../../Assets/Images/Down.svg'
 
 import './Navbar.css'
 
@@ -27,13 +25,13 @@ export default function Navbar(props) {
                 <div>
                     <div className="nav-disp-btn" onClick={handleDisplayToggle}>
                         <div className="nav-disp-icon nav-disp-filter">
-                            <img src={filterIcon} alt="icon" />
+                            <img src={'/assets/Display.svg'} alt="icon" />
                         </div>
                         <div className="nav-disp-heading">
                             Display
                         </div>
                         <div className="nav-disp-icon nav-disp-drop">
-                            <img src={downIcon} alt="icon" />
+                            <img src={'/assets/down.svg'} alt="icon" />
                         </div>
                     </div>
                     <div className={toggleFilter ? "nav-disp-dropdown nav-disp-dropdown-show" : "nav-disp-dropdown"}>
