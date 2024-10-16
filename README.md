@@ -1,3 +1,5 @@
+# Kanban Board React
+Deployment link- https://kanban-board-nine-tawny.vercel.app/
 Api Used : https://api.quicksell.co/v1/internal/frontend-assignment When a user clicks the "display" button and selects a grouping option, the Kanban board should dynamically adjust to reflect the user's choice.
 
 The application should offer three distinct ways to group the data:
@@ -6,8 +8,6 @@ By Status: Group tickets based on their current status.
 By User: Arrange tickets according to the assigned user.
 By Priority: Group tickets based on their priority level.
 Users should also be able to sort the displayed tickets in two ways:
-#Kanban Board React
-Deployment link- https://kanban-board-nine-tawny.vercel.app/
 
 
 Priority: Arrange tickets in descending order of priority.
